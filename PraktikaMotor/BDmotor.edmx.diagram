@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="55b6b07f31a843ae8dcb9fd07fb889e9" Name="Diagram1">
+        <EntityTypeShape EntityType="MotorModel.CarsSet" Width="1.5" PointX="2.5" PointY="1.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="MotorModel.ClientsSet" Width="1.5" PointX="5.375" PointY="1.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="MotorModel.NumbersSet" Width="1.5" PointX="8.375" PointY="5.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="MotorModel.OrdersSet" Width="1.5" PointX="2.875" PointY="6.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="MotorModel.SalesSet" Width="1.5" PointX="5.5" PointY="6.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="MotorModel.TradeInSet" Width="1.5" PointX="8.875" PointY="2.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="MotorModel.Users" Width="1.5" PointX="10.875" PointY="4.875" IsExpanded="true" />
+        <AssociationConnector Association="MotorModel.FK_OrdersSet_CarsSet" ManuallyRouted="false" />
+        <AssociationConnector Association="MotorModel.FK_SalesSet_CarsSet" ManuallyRouted="true" >
+          <ConnectorPoint PointX="3.9999999999999996" PointY="4.0571907552083335" />
+          <ConnectorPoint PointX="4.375" PointY="4.4217740885416674" />
+          <ConnectorPoint PointX="4.541666666666667" PointY="4.4217740885416674" />
+          <ConnectorPoint PointX="4.541666666666667" PointY="5.75" />
+          <ConnectorPoint PointX="5.125" PointY="5.75" />
+          <ConnectorPoint PointX="5.5" PointY="6.125" />
+        </AssociationConnector>
+        <AssociationConnector Association="MotorModel.FK_NumbersSet_ClientsSet" ManuallyRouted="false" />
+        <AssociationConnector Association="MotorModel.FK_OrdersSet_ClientsSet" ManuallyRouted="true" >
+          <ConnectorPoint PointX="5.375" PointY="4.2807421875" />
+          <ConnectorPoint PointX="4.9934375" PointY="4.2807421875" />
+          <ConnectorPoint PointX="4.9934375" PointY="5.1036588541666665" />
+          <ConnectorPoint PointX="4.625" PointY="5.1036588541666656" />
+          <ConnectorPoint PointX="4.4583333333333339" PointY="5.1036588541666665" />
+          <ConnectorPoint PointX="4.21875" PointY="5.1036588541666665" />
+          <ConnectorPoint PointX="4.21875" PointY="6.125" />
+        </AssociationConnector>
+        <AssociationConnector Association="MotorModel.FK_SalesSet_ClientsSet" ManuallyRouted="false" />
+        <AssociationConnector Association="MotorModel.FK_TradeInSet_ClientsSet" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

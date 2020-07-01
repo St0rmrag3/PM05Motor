@@ -1,0 +1,481 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="Хранилище MotorModel" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="CarsSet">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Mark" Type="nvarchar(max)" />
+          <Property Name="Model" Type="nvarchar(max)" />
+          <Property Name="Kompl" Type="nvarchar(max)" />
+          <Property Name="SerNumber" Type="nvarchar(max)" />
+          <Property Name="Price" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="ClientsSet">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FirstName" Type="nvarchar(max)" />
+          <Property Name="MiddleName" Type="nvarchar(max)" />
+          <Property Name="LastName" Type="nvarchar(max)" />
+          <Property Name="Phone" Type="nvarchar(max)" />
+          <Property Name="Email" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="NumbersSet">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IdClient" Type="int" Nullable="false" />
+          <Property Name="Number" Type="nvarchar(max)" />
+          <Property Name="Price" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="OrdersSet">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IdClient" Type="int" Nullable="false" />
+          <Property Name="IdCar" Type="int" Nullable="false" />
+          <Property Name="Date" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="SalesSet">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IdClient" Type="int" Nullable="false" />
+          <Property Name="IdCar" Type="int" Nullable="false" />
+          <Property Name="Date" Type="nvarchar(max)" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TradeInSet">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IdClient" Type="int" Nullable="false" />
+          <Property Name="Mark" Type="nvarchar(max)" />
+          <Property Name="Model" Type="nvarchar(max)" />
+          <Property Name="Year" Type="nvarchar(max)" />
+          <Property Name="SerNumber" Type="nvarchar(max)" />
+          <Property Name="PrePrice" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="Users">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Login" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Password" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Type" Type="nvarchar(max)" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_NumbersSet_ClientsSet">
+          <End Role="ClientsSet" Type="Self.ClientsSet" Multiplicity="1" />
+          <End Role="NumbersSet" Type="Self.NumbersSet" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ClientsSet">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="NumbersSet">
+              <PropertyRef Name="IdClient" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_OrdersSet_CarsSet">
+          <End Role="CarsSet" Type="Self.CarsSet" Multiplicity="1" />
+          <End Role="OrdersSet" Type="Self.OrdersSet" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CarsSet">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="OrdersSet">
+              <PropertyRef Name="IdCar" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_OrdersSet_ClientsSet">
+          <End Role="ClientsSet" Type="Self.ClientsSet" Multiplicity="1" />
+          <End Role="OrdersSet" Type="Self.OrdersSet" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ClientsSet">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="OrdersSet">
+              <PropertyRef Name="IdClient" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SalesSet_CarsSet">
+          <End Role="CarsSet" Type="Self.CarsSet" Multiplicity="1" />
+          <End Role="SalesSet" Type="Self.SalesSet" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CarsSet">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="SalesSet">
+              <PropertyRef Name="IdCar" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SalesSet_ClientsSet">
+          <End Role="ClientsSet" Type="Self.ClientsSet" Multiplicity="1" />
+          <End Role="SalesSet" Type="Self.SalesSet" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ClientsSet">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="SalesSet">
+              <PropertyRef Name="IdClient" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TradeInSet_ClientsSet">
+          <End Role="ClientsSet" Type="Self.ClientsSet" Multiplicity="1" />
+          <End Role="TradeInSet" Type="Self.TradeInSet" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ClientsSet">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TradeInSet">
+              <PropertyRef Name="IdClient" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Хранилище MotorModelContainer">
+          <EntitySet Name="CarsSet" EntityType="Self.CarsSet" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ClientsSet" EntityType="Self.ClientsSet" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="NumbersSet" EntityType="Self.NumbersSet" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="OrdersSet" EntityType="Self.OrdersSet" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SalesSet" EntityType="Self.SalesSet" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TradeInSet" EntityType="Self.TradeInSet" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_NumbersSet_ClientsSet" Association="Self.FK_NumbersSet_ClientsSet">
+            <End Role="ClientsSet" EntitySet="ClientsSet" />
+            <End Role="NumbersSet" EntitySet="NumbersSet" />
+          </AssociationSet>
+          <AssociationSet Name="FK_OrdersSet_CarsSet" Association="Self.FK_OrdersSet_CarsSet">
+            <End Role="CarsSet" EntitySet="CarsSet" />
+            <End Role="OrdersSet" EntitySet="OrdersSet" />
+          </AssociationSet>
+          <AssociationSet Name="FK_OrdersSet_ClientsSet" Association="Self.FK_OrdersSet_ClientsSet">
+            <End Role="ClientsSet" EntitySet="ClientsSet" />
+            <End Role="OrdersSet" EntitySet="OrdersSet" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SalesSet_CarsSet" Association="Self.FK_SalesSet_CarsSet">
+            <End Role="CarsSet" EntitySet="CarsSet" />
+            <End Role="SalesSet" EntitySet="SalesSet" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SalesSet_ClientsSet" Association="Self.FK_SalesSet_ClientsSet">
+            <End Role="ClientsSet" EntitySet="ClientsSet" />
+            <End Role="SalesSet" EntitySet="SalesSet" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TradeInSet_ClientsSet" Association="Self.FK_TradeInSet_ClientsSet">
+            <End Role="ClientsSet" EntitySet="ClientsSet" />
+            <End Role="TradeInSet" EntitySet="TradeInSet" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="MotorModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="CarsSet">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Mark" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Model" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Kompl" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="SerNumber" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Price" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="OrdersSet" Relationship="Self.FK_OrdersSet_CarsSet" FromRole="CarsSet" ToRole="OrdersSet" />
+          <NavigationProperty Name="SalesSet" Relationship="Self.FK_SalesSet_CarsSet" FromRole="CarsSet" ToRole="SalesSet" />
+        </EntityType>
+        <EntityType Name="ClientsSet">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FirstName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="MiddleName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="LastName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Phone" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Email" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="NumbersSet" Relationship="Self.FK_NumbersSet_ClientsSet" FromRole="ClientsSet" ToRole="NumbersSet" />
+          <NavigationProperty Name="OrdersSet" Relationship="Self.FK_OrdersSet_ClientsSet" FromRole="ClientsSet" ToRole="OrdersSet" />
+          <NavigationProperty Name="SalesSet" Relationship="Self.FK_SalesSet_ClientsSet" FromRole="ClientsSet" ToRole="SalesSet" />
+          <NavigationProperty Name="TradeInSet" Relationship="Self.FK_TradeInSet_ClientsSet" FromRole="ClientsSet" ToRole="TradeInSet" />
+        </EntityType>
+        <EntityType Name="NumbersSet">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IdClient" Type="Int32" Nullable="false" />
+          <Property Name="Number" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Price" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="ClientsSet" Relationship="Self.FK_NumbersSet_ClientsSet" FromRole="NumbersSet" ToRole="ClientsSet" />
+        </EntityType>
+        <EntityType Name="OrdersSet">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IdClient" Type="Int32" Nullable="false" />
+          <Property Name="IdCar" Type="Int32" Nullable="false" />
+          <Property Name="Date" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="CarsSet" Relationship="Self.FK_OrdersSet_CarsSet" FromRole="OrdersSet" ToRole="CarsSet" />
+          <NavigationProperty Name="ClientsSet" Relationship="Self.FK_OrdersSet_ClientsSet" FromRole="OrdersSet" ToRole="ClientsSet" />
+        </EntityType>
+        <EntityType Name="SalesSet">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IdClient" Type="Int32" Nullable="false" />
+          <Property Name="IdCar" Type="Int32" Nullable="false" />
+          <Property Name="Date" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="CarsSet" Relationship="Self.FK_SalesSet_CarsSet" FromRole="SalesSet" ToRole="CarsSet" />
+          <NavigationProperty Name="ClientsSet" Relationship="Self.FK_SalesSet_ClientsSet" FromRole="SalesSet" ToRole="ClientsSet" />
+        </EntityType>
+        <EntityType Name="TradeInSet">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IdClient" Type="Int32" Nullable="false" />
+          <Property Name="Mark" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Model" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Year" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="SerNumber" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="PrePrice" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="ClientsSet" Relationship="Self.FK_TradeInSet_ClientsSet" FromRole="TradeInSet" ToRole="ClientsSet" />
+        </EntityType>
+        <EntityType Name="Users">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Login" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Password" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Type" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_OrdersSet_CarsSet">
+          <End Role="CarsSet" Type="Self.CarsSet" Multiplicity="1" />
+          <End Role="OrdersSet" Type="Self.OrdersSet" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CarsSet">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="OrdersSet">
+              <PropertyRef Name="IdCar" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SalesSet_CarsSet">
+          <End Role="CarsSet" Type="Self.CarsSet" Multiplicity="1" />
+          <End Role="SalesSet" Type="Self.SalesSet" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CarsSet">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="SalesSet">
+              <PropertyRef Name="IdCar" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_NumbersSet_ClientsSet">
+          <End Role="ClientsSet" Type="Self.ClientsSet" Multiplicity="1" />
+          <End Role="NumbersSet" Type="Self.NumbersSet" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ClientsSet">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="NumbersSet">
+              <PropertyRef Name="IdClient" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_OrdersSet_ClientsSet">
+          <End Role="ClientsSet" Type="Self.ClientsSet" Multiplicity="1" />
+          <End Role="OrdersSet" Type="Self.OrdersSet" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ClientsSet">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="OrdersSet">
+              <PropertyRef Name="IdClient" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SalesSet_ClientsSet">
+          <End Role="ClientsSet" Type="Self.ClientsSet" Multiplicity="1" />
+          <End Role="SalesSet" Type="Self.SalesSet" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ClientsSet">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="SalesSet">
+              <PropertyRef Name="IdClient" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TradeInSet_ClientsSet">
+          <End Role="ClientsSet" Type="Self.ClientsSet" Multiplicity="1" />
+          <End Role="TradeInSet" Type="Self.TradeInSet" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ClientsSet">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TradeInSet">
+              <PropertyRef Name="IdClient" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="MotorEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="CarsSet" EntityType="Self.CarsSet" />
+          <EntitySet Name="ClientsSet" EntityType="Self.ClientsSet" />
+          <EntitySet Name="NumbersSet" EntityType="Self.NumbersSet" />
+          <EntitySet Name="OrdersSet" EntityType="Self.OrdersSet" />
+          <EntitySet Name="SalesSet" EntityType="Self.SalesSet" />
+          <EntitySet Name="TradeInSet" EntityType="Self.TradeInSet" />
+          <EntitySet Name="Users" EntityType="Self.Users" />
+          <AssociationSet Name="FK_OrdersSet_CarsSet" Association="Self.FK_OrdersSet_CarsSet">
+            <End Role="CarsSet" EntitySet="CarsSet" />
+            <End Role="OrdersSet" EntitySet="OrdersSet" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SalesSet_CarsSet" Association="Self.FK_SalesSet_CarsSet">
+            <End Role="CarsSet" EntitySet="CarsSet" />
+            <End Role="SalesSet" EntitySet="SalesSet" />
+          </AssociationSet>
+          <AssociationSet Name="FK_NumbersSet_ClientsSet" Association="Self.FK_NumbersSet_ClientsSet">
+            <End Role="ClientsSet" EntitySet="ClientsSet" />
+            <End Role="NumbersSet" EntitySet="NumbersSet" />
+          </AssociationSet>
+          <AssociationSet Name="FK_OrdersSet_ClientsSet" Association="Self.FK_OrdersSet_ClientsSet">
+            <End Role="ClientsSet" EntitySet="ClientsSet" />
+            <End Role="OrdersSet" EntitySet="OrdersSet" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SalesSet_ClientsSet" Association="Self.FK_SalesSet_ClientsSet">
+            <End Role="ClientsSet" EntitySet="ClientsSet" />
+            <End Role="SalesSet" EntitySet="SalesSet" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TradeInSet_ClientsSet" Association="Self.FK_TradeInSet_ClientsSet">
+            <End Role="ClientsSet" EntitySet="ClientsSet" />
+            <End Role="TradeInSet" EntitySet="TradeInSet" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="Хранилище MotorModelContainer" CdmEntityContainer="MotorEntities">
+          <EntitySetMapping Name="CarsSet">
+            <EntityTypeMapping TypeName="MotorModel.CarsSet">
+              <MappingFragment StoreEntitySet="CarsSet">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Mark" ColumnName="Mark" />
+                <ScalarProperty Name="Model" ColumnName="Model" />
+                <ScalarProperty Name="Kompl" ColumnName="Kompl" />
+                <ScalarProperty Name="SerNumber" ColumnName="SerNumber" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ClientsSet">
+            <EntityTypeMapping TypeName="MotorModel.ClientsSet">
+              <MappingFragment StoreEntitySet="ClientsSet">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="MiddleName" ColumnName="MiddleName" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="Phone" ColumnName="Phone" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="NumbersSet">
+            <EntityTypeMapping TypeName="MotorModel.NumbersSet">
+              <MappingFragment StoreEntitySet="NumbersSet">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="IdClient" ColumnName="IdClient" />
+                <ScalarProperty Name="Number" ColumnName="Number" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="OrdersSet">
+            <EntityTypeMapping TypeName="MotorModel.OrdersSet">
+              <MappingFragment StoreEntitySet="OrdersSet">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="IdClient" ColumnName="IdClient" />
+                <ScalarProperty Name="IdCar" ColumnName="IdCar" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SalesSet">
+            <EntityTypeMapping TypeName="MotorModel.SalesSet">
+              <MappingFragment StoreEntitySet="SalesSet">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="IdClient" ColumnName="IdClient" />
+                <ScalarProperty Name="IdCar" ColumnName="IdCar" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TradeInSet">
+            <EntityTypeMapping TypeName="MotorModel.TradeInSet">
+              <MappingFragment StoreEntitySet="TradeInSet">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="IdClient" ColumnName="IdClient" />
+                <ScalarProperty Name="Mark" ColumnName="Mark" />
+                <ScalarProperty Name="Model" ColumnName="Model" />
+                <ScalarProperty Name="Year" ColumnName="Year" />
+                <ScalarProperty Name="SerNumber" ColumnName="SerNumber" />
+                <ScalarProperty Name="PrePrice" ColumnName="PrePrice" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Users">
+            <EntityTypeMapping TypeName="MotorModel.Users">
+              <MappingFragment StoreEntitySet="Users">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Login" ColumnName="Login" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="Type" ColumnName="Type" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Нет" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
